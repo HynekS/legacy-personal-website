@@ -5,7 +5,6 @@ import { CONTENT_DIR, WORK_DIR } from "@/constants"
 import Container from "@/components/Container"
 import path from "path"
 import fs from "fs"
-import { execSync } from "child_process"
 import matter from "gray-matter"
 
 export default function SingleProjectPage({ source }) {
@@ -29,18 +28,8 @@ export const getStaticProps = async context => {
   const filePath = path.join(process.cwd(), `${contentPath}/${slug}/index.mdx`)
   const rawContents = fs.readFileSync(filePath, "utf8")
 
-  // const gihubFileLink = `https://github.com/HynekS/personal-website/edit/main/__content__/__blog__/${slug}/index.mdx`
-
-  const allAuthorDates = execSync(
-    `git log --follow --name-status --pretty=format:%aI -- ${filePath}`,
-  ).toString()
-
-  // const [lastEditExceptPathChangeDate] = allAuthorDates.match(/20[\d-T:.Z+]+$(?!\r?\nR)/m) || []
-
-  const { content, data: meta }: { content: string; data: Meta } = matter(rawContents)
-  const mdxSource = await serialize(content, {
-    scope: meta,
-  })
+  const { content }: { content: string } = matter(rawContents)
+  const mdxSource = await serialize(content)
 
   return {
     props: {
@@ -49,7 +38,7 @@ export const getStaticProps = async context => {
   }
 }
 
-export const getStaticPaths = async context => {
+export const getStaticPaths = async () => {
   const contentPath = `${CONTENT_DIR}/${WORK_DIR}`
   const projectsDirectory = path.join(process.cwd(), contentPath)
   const folderNames = fs.readdirSync(projectsDirectory)

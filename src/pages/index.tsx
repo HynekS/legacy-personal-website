@@ -53,10 +53,10 @@ const Index = ({ links = [] }: InferGetStaticPropsType<typeof getStaticProps>): 
                       <Link href={"/blog/" + link.slug}>
                         <img
                           tw="object-cover rounded-full width[4em] height[4em] mb-3 mr-4 dark:(filter[brightness(0.75) contrast(1.1)] border-4 border-color[#656a72]) light:(opacity-90 border-4 border-gray-200) md:(mt-3)"
-                          src={require(`_mdx_/${link.slug}/${link.featuredImage}?resize&size=80`)}
+                          src={require(`__content__/__blog__/${link.slug}/${link.featuredImage}?resize&size=80`)}
                           alt="thumbnail"
                           srcSet={
-                            require(`_mdx_/${link.slug}/${link.featuredImage}?resize&size=80`)
+                            require(`__content__/__blog__/${link.slug}/${link.featuredImage}?resize&size=80`)
                               .srcSet
                           }
                         />
@@ -98,13 +98,16 @@ const Index = ({ links = [] }: InferGetStaticPropsType<typeof getStaticProps>): 
 }
 
 export const getStaticProps = async () => {
-  const postsDirectory = path.join(process.cwd(), "_mdx_")
+  const postsDirectory = path.join(process.cwd(), "__content__/__blog__")
   const filenames = fs.readdirSync(postsDirectory)
 
   const links = filenames
-    .filter(path => fs.existsSync(`${process.cwd()}/_mdx_/${path}/index.mdx`))
+    .filter(path => fs.existsSync(`${process.cwd()}/__content__/__blog__/${path}/index.mdx`))
     .map(path => {
-      const rawContents = fs.readFileSync(`${process.cwd()}/_mdx_/${path}/index.mdx`, "utf8")
+      const rawContents = fs.readFileSync(
+        `${process.cwd()}/__content__/__blog__/${path}/index.mdx`,
+        "utf8",
+      )
       const { data: meta }: { data: Meta } = matter(rawContents)
       return { ...meta, slug: path }
     })

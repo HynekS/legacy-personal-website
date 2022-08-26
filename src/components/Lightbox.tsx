@@ -51,9 +51,9 @@ const Lightbox = (props: LightboxProps): JSX.Element | null => {
             key={src + index}
           >
             <img
-              src={require(`_mdx_/${slug}/${image.src}?resize&sizes[]=320&sizes[]=640&sizes[]=800`)}
+              src={require(`__content__/__blog__/${slug}/${image.src}?resize&sizes[]=320&sizes[]=640&sizes[]=800`)}
               srcSet={
-                require(`_mdx_/${slug}/${image.src}?resize&sizes[]=320&sizes[]=640&sizes[]=800`)
+                require(`__content__/__blog__/${slug}/${image.src}?resize&sizes[]=320&sizes[]=640&sizes[]=800`)
                   .srcSet
               }
               //sizes="(min-width: 960px) 640px, 100vw"
@@ -127,11 +127,11 @@ const Lightbox = (props: LightboxProps): JSX.Element | null => {
               </button>
             ) : null}
             <img
-              src={require(`_mdx_/${slug}/${
+              src={require(`__content__/__blog__/${slug}/${
                 images[currentIndex % images.length].src
               }?resize&sizes[]=640&sizes[]=800&sizes[]=1200`)}
               srcSet={
-                require(`_mdx_/${slug}/${
+                require(`__content__/__blog__/${slug}/${
                   images[currentIndex % images.length].src
                 }?resize&sizes[]=640&sizes[]=800&sizes[]=1200`).srcSet
               }

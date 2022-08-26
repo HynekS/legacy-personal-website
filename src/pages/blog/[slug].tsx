@@ -19,6 +19,7 @@ import Lightbox from "@/components/Lightbox"
 import ScrollToTop from "@/components/ScrollToTop"
 import PrettyDate from "@/components/PrettyDate"
 import useObserveActiveSection from "@/hooks/useObserveActiveSection"
+import { CONTENT_DIR, BLOG_DIR } from "@/constants"
 
 import type { ReactNode } from "react"
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
@@ -126,7 +127,12 @@ const components = (slug: string, meta: Meta): Components => ({
 
   img: ({ src, alt = "", className, ...props }: ImgProps) => {
     return className?.includes("noTransform") ? (
-      <img src={require(`_mdx_/${slug}/${src}`)} alt={alt} className={className} {...props} />
+      <img
+        src={require(`__content__/__blog__/${slug}/${src}`)}
+        alt={alt}
+        className={className}
+        {...props}
+      />
     ) : (
       <Lightbox images={[{ src, alt }]} slug={slug} {...props} />
     )
@@ -149,11 +155,11 @@ export type Meta = {
 
 const getFeaturedImage = (slug: string, meta: Meta) => {
   try {
-    require(`_mdx_/${slug}/${meta.featuredImage}`)
+    require(`__content__/__blog__/${slug}/${meta.featuredImage}`)
     return {
       images: [
         {
-          url: require(`_mdx_/${slug}/${meta.featuredImage}`),
+          url: require(`__content__/__blog__/${slug}/${meta.featuredImage}`),
           width: 800,
           height: 600,
           alt: "featured image",
@@ -217,7 +223,7 @@ export default function Post({
             tw="prose prose-sm mx-auto pt-8 px-4 md:(prose) lg:(prose-lg px-0) dark:(prose-dark) pb-16"
           >
             {meta.featuredImage ? (
-              <img src={require(`_mdx_/${slug}/${meta.featuredImage}`)} />
+              <img src={require(`__content__/__blog__/${slug}/${meta.featuredImage}`)} />
             ) : null}
             <MDXRemote {...source} components={components(slug, meta)} scope={meta} />
             {meta.dateLastModified ? (
@@ -243,11 +249,12 @@ export default function Post({
 }
 
 export const getStaticProps = async (context: GetStaticPropsContext<{ slug: string }>) => {
+  const contentPath = `${CONTENT_DIR}/${BLOG_DIR}`
   const slug = String(context.params?.slug)
-  const filePath = path.join(process.cwd(), `_mdx_/${slug}/index.mdx`)
+  const filePath = path.join(process.cwd(), `${contentPath}/${slug}/index.mdx`)
   const rawContents = fs.readFileSync(filePath, "utf8")
 
-  const gihubFileLink = `https://github.com/HynekS/personal-website/edit/main/_mdx_/${slug}/index.mdx`
+  const gihubFileLink = `https://github.com/HynekS/personal-website/edit/main/${contentPath}/${slug}/index.mdx`
 
   const allAuthorDates = execSync(
     `git log --follow --name-status --pretty=format:%aI -- ${filePath}`,
@@ -279,11 +286,12 @@ export const getStaticProps = async (context: GetStaticPropsContext<{ slug: stri
 }
 
 export const getStaticPaths = async () => {
-  const postsDirectory = path.join(process.cwd(), "_mdx_")
+  const contentPath = `${CONTENT_DIR}/${BLOG_DIR}`
+  const postsDirectory = path.join(process.cwd(), contentPath)
   const filenames = fs.readdirSync(postsDirectory)
 
   const paths = filenames
-    .filter(path => fs.existsSync(`${process.cwd()}/_mdx_/${path}/index.mdx`))
+    .filter(path => fs.existsSync(`${process.cwd()}/${contentPath}/${path}/index.mdx`))
     .map(path => {
       const slug = path.split(".")[0]
 

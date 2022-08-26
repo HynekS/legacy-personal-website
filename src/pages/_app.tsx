@@ -7,7 +7,7 @@ import { MDXEmbedProvider } from "mdx-embed"
 import Lightbox from "@/components/Lightbox"
 import { ThemeProvider } from "../components/Theme"
 
-import "../public/assets/styles/base.css"
+import "../../public/assets/styles/base.css"
 import "html5-device-mockups/dist/device-mockups.min.css"
 
 const components = {

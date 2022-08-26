@@ -24,7 +24,7 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <script type="text/javascript" src="/assets/scripts/theme.js"></script>
+          <script type="text/javascript" src="/assets/scripts/theme.js" />
           <Main />
           <NextScript />
         </body>

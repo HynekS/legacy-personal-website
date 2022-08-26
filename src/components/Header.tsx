@@ -13,6 +13,8 @@ const Header = (): JSX.Element => {
           <Logo />
         </a>
       </Link>
+      <Link href="/">blog</Link>
+      <Link href="/work">work</Link>
       <div>
         <ThemeToggle />
       </div>

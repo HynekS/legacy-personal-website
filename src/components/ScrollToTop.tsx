@@ -8,6 +8,7 @@ interface ScrollToTopProps {
 
 const ScrollToTop = ({ treshold, scrollContainer }: ScrollToTopProps) => {
   const [visible, setVisible] = useState(false)
+  const [isLoopingAnimation, setIsLoopingAnimation] = useState(false)
 
   useEffect(() => {
     if (scrollContainer) {
@@ -51,9 +52,28 @@ const ScrollToTop = ({ treshold, scrollContainer }: ScrollToTopProps) => {
 
   return (
     <button
+      onMouseOver={() => {
+        if (!isLoopingAnimation) {
+          setIsLoopingAnimation(true)
+          setTimeout(() => {
+            setIsLoopingAnimation(false)
+          }, 2400)
+        }
+      }}
       css={[
+        `@keyframes bounce-reverse {
+          0%, 100% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+          }
+          50% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+          }
+        }`,
         tw`fixed bottom-6 right-10 bg-primary origin-center transition-transform shadow-xl rounded-full text-primary flex items-center justify-center border-2 p-3 focus:(outline-none ring-0) dark:(border-coolGray-600)`,
         visible ? tw`scale-100` : tw`scale-0`,
+        isLoopingAnimation && `animation: bounce-reverse 0.8s infinite;`,
       ]}
       onClick={scrollToTop}
       aria-label="Scroll to top"

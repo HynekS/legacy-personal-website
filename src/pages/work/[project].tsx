@@ -10,7 +10,7 @@ import matter from "gray-matter"
 export default function SingleProjectPage({ source }) {
   return (
     <Container>
-      <main tw="flex-auto max-w-full margin-right[calc((50% - 30ch)/2)]">
+      <main tw="flex-auto max-w-full">
         <article tw="prose prose-sm mx-auto pt-8 px-4 md:(prose) lg:(prose-lg px-0) light:(prose-thin) dark:(prose-dark prose-thin) pb-16">
           <MDXRemote {...source} />
           <hr />
@@ -21,8 +21,6 @@ export default function SingleProjectPage({ source }) {
 }
 
 export const getStaticProps = async context => {
-  console.log({ context })
-
   const contentPath = `${CONTENT_DIR}/${WORK_DIR}`
   const slug = String(context.params?.project)
   const filePath = path.join(process.cwd(), `${contentPath}/${slug}/index.mdx`)

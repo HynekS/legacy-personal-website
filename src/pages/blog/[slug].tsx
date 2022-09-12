@@ -214,7 +214,7 @@ export default function Post({
         }}
       />
       <Container>
-        <aside tw="hidden md:(block w-1/5 pt-6)">
+        <aside tw="hidden md:(block w-1/5)">
           {toc ? <RecursiveList tree={toc} ref={navRef} /> : null}
         </aside>
         <main tw="flex-auto max-w-full margin-right[calc((50% - 30ch)/2)]">

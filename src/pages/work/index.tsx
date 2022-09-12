@@ -80,9 +80,14 @@ export default function WorkPage({ links = [] }) {
                 <Link href={`/work/${link.slug}`}>{link.title}</Link>
               </h2>
               {!!link.categories && (
-                <ul>
+                <ul tw="flex gap-1.5 mt-1">
                   {link.categories.map(category => (
-                    <li key={category}>{category}</li>
+                    <li
+                      tw="font-mono text-xs rounded-md py-0.5 px-1.5 dark:(bg-gray-800) light:(bg-gray-100)"
+                      key={category}
+                    >
+                      {category}
+                    </li>
                   ))}
                 </ul>
               )}

@@ -75,8 +75,7 @@ export default function WorkPage({ links = [] }) {
         <h1 tw="text-4xl font-bold">Projects</h1>
         <ul tw="mt-4 list-none">
           {links.map(link => (
-            <li>
-              {/*<pre>{JSON.stringify(link, null, 2)}</pre>*/}
+            <li key={link.slug} tw="my-8">
               <h2 tw="text-3xl font-semibold">
                 <Link href={`/work/${link.slug}`}>{link.title}</Link>
               </h2>

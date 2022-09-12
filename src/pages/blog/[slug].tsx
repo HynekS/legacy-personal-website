@@ -5,7 +5,7 @@ import { serialize } from "next-mdx-remote/serialize"
 import { MDXRemote } from "next-mdx-remote"
 import matter from "gray-matter"
 import slugify from "slugify"
-import readingTime, { ReadTimeResults } from "reading-time"
+import readingTime from "reading-time"
 import { preToCodeBlock } from "mdx-utils"
 import { onlyText } from "react-children-utilities"
 import path from "path"
@@ -20,6 +20,7 @@ import ScrollToTop from "@/components/ScrollToTop"
 import PrettyDate from "@/components/PrettyDate"
 import useObserveActiveSection from "@/hooks/useObserveActiveSection"
 import { CONTENT_DIR, BLOG_DIR } from "@/constants"
+import type { Meta } from "@/types"
 
 import type { ReactNode } from "react"
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
@@ -138,20 +139,6 @@ const components = (slug: string, meta: Meta): Components => ({
     )
   },
 })
-
-export type Meta = {
-  title?: string
-  author?: string
-  type?: string
-  dateCreated?: string
-  dateLastModified?: string
-  featuredImage?: string
-  categories?: string[]
-  keywords?: string[]
-  description?: string
-  timeToRead?: ReadTimeResults
-  gihubFileLink?: string
-}
 
 const getFeaturedImage = (slug: string, meta: Meta) => {
   try {

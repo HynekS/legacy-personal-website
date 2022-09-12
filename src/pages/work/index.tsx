@@ -7,7 +7,7 @@ import { IPhone7, Macbook2015 } from "react-device-mockups"
 import { CONTENT_DIR, WORK_DIR } from "@/constants"
 import Container from "@/components/Container"
 
-import type { Meta } from "../blog/[slug]"
+import type { Meta } from "@/types"
 import matter from "gray-matter"
 import Link from "next/link"
 

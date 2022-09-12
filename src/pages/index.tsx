@@ -4,13 +4,11 @@ import fs from "fs"
 import matter from "gray-matter"
 import { NextSeo } from "next-seo"
 import tw from "twin.macro"
-
 import { InferGetStaticPropsType } from "next"
-
-import type { Meta } from "../pages/blog/[slug]"
 
 import Container from "@/components/Container"
 import PrettyDate from "@/components/PrettyDate"
+import type { Meta } from "@/types"
 
 const DESCRIPTION = "A blog featurnig posts about React, Next.js, front-end development & more."
 

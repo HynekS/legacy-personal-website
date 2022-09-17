@@ -210,7 +210,7 @@ export default function Post({
             ) : null}
             <MDXRemote {...source} components={components(slug, meta)} scope={meta} />
             {meta.dateLastModified ? (
-              <p>
+              <p tw="text-xs">
                 last modified <PrettyDate date={new Date(meta.dateLastModified)} />
               </p>
             ) : null}

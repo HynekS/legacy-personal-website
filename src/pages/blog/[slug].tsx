@@ -24,6 +24,7 @@ import type { Meta } from "@/types"
 
 import type { ReactNode } from "react"
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import ListItem from "@/components/ListItem"
 
 export type LinkProps = {
   href: string
@@ -96,12 +97,7 @@ const components = (slug: string, meta: Meta): Components => ({
           {!!meta.categories.length && (
             <ul tw="flex gap-1.5 mt-0! mb-1! ml--1!">
               {meta.categories.map(category => (
-                <li
-                  tw="font-mono text-xs rounded-md py-1 px-2! dark:(background-color[#2a3340]) light:(bg-gray-100) before:(hidden)"
-                  key={category}
-                >
-                  {category}
-                </li>
+                <ListItem category={category} key={category} />
               ))}
             </ul>
           )}

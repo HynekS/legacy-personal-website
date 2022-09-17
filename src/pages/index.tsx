@@ -8,6 +8,7 @@ import { InferGetStaticPropsType } from "next"
 
 import Container from "@/components/Container"
 import PrettyDate from "@/components/PrettyDate"
+import ListItem from "@/components/ListItem"
 import type { Meta } from "@/types"
 
 const DESCRIPTION = "A blog featurnig posts about React, Next.js, front-end development & more."
@@ -66,14 +67,9 @@ const Index = ({ links = [] }: InferGetStaticPropsType<typeof getStaticProps>): 
                       <Link href={"/blog/" + link.slug}>{link.title}</Link>
                     </h2>
                     {link.categories ? (
-                      <ul tw="flex gap-1.5 mt-1">
+                      <ul tw="flex gap-1.5 mt-2 mb-1">
                         {link.categories.map(category => (
-                          <li
-                            tw="font-mono text-xs rounded-md py-0.5 px-1.5 dark:(bg-gray-800) light:(bg-gray-100)"
-                            key={category}
-                          >
-                            {category}
-                          </li>
+                          <ListItem category={category} key={category} />
                         ))}
                       </ul>
                     ) : null}

@@ -10,6 +10,9 @@ import Container from "@/components/Container"
 import type { Meta } from "@/types"
 import matter from "gray-matter"
 import Link from "next/link"
+import { NextSeo } from "next-seo"
+
+const DESCRIPTION = "My sample projects."
 
 const MockupTest = () => {
   return (
@@ -70,32 +73,52 @@ export default function WorkPage({ links = [] }) {
     return <p>No projects yet!</p>
   }
   return (
-    <Container>
-      <div tw="h-full px-4 mx-auto max-w-prose light:(text-secondary)">
-        <h1 tw="text-4xl font-bold">Projects</h1>
-        <ul tw="mt-4 list-none">
-          {links.map(link => (
-            <li key={link.slug} tw="my-8">
-              <h2 tw="text-3xl font-semibold">
-                <Link href={`/work/${link.slug}`}>{link.title}</Link>
-              </h2>
-              {!!link.categories && (
-                <ul tw="flex gap-1.5 mt-1">
-                  {link.categories.map(category => (
-                    <li
-                      tw="font-mono text-xs rounded-md py-0.5 px-1.5 dark:(bg-gray-800) light:(bg-gray-100)"
-                      key={category}
-                    >
-                      {category}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Container>
+    <>
+      <NextSeo
+        title={"Projects | HynekS"}
+        description={DESCRIPTION}
+        openGraph={{
+          //url: "https://www.url.ie/a",
+          title: "Projects | HynekS",
+          description: DESCRIPTION,
+          //...getFeaturedImage(slug, meta),
+          //site_name: "HynekS",
+          type: "website",
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
+
+      <Container>
+        <div tw="h-full px-4 mx-auto max-w-prose light:(text-secondary)">
+          <h1 tw="text-4xl font-bold">Projects</h1>
+          <ul tw="mt-4 list-none">
+            {links.map(link => (
+              <li key={link.slug} tw="my-8">
+                <h2 tw="text-3xl font-semibold">
+                  <Link href={`/work/${link.slug}`}>{link.title}</Link>
+                </h2>
+                {!!link.categories && (
+                  <ul tw="flex gap-1.5 mt-1">
+                    {link.categories.map(category => (
+                      <li
+                        tw="font-mono text-xs rounded-md py-0.5 px-1.5 dark:(bg-gray-800) light:(bg-gray-100)"
+                        key={category}
+                      >
+                        {category}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </>
   )
 }
 

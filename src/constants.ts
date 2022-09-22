@@ -9,9 +9,9 @@ const LIB_COLORS = {
   redux: "#764abc",
   tailwindcss: "#07B6D5",
   graphql: "#E434AA",
-  nextjs: "#000000",
+  nextjs: "#666666",
   laravel: "#FF2D20",
-  wordpress: "#464646",
+  wordpress: "#00749C",
   nodejs: "#68A063",
 }
 

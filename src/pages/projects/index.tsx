@@ -99,7 +99,7 @@ export default function WorkPage({ links = [] }) {
             {links.map(link => (
               <li key={link.slug} tw="my-8">
                 <h2 tw="text-3xl font-semibold">
-                  <Link href={`/work/${link.slug}`}>{link.title}</Link>
+                  <Link href={`/projects/${link.slug}`}>{link.title}</Link>
                 </h2>
                 {!!link.categories && (
                   <ul tw="flex gap-1.5 mt-1">

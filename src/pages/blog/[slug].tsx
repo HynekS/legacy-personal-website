@@ -215,7 +215,7 @@ export default function Post({
               </p>
             ) : null}
             <hr />
-            <p tw="text-base">
+            <p tw="text-sm">
               If you find anything in this post that should be improved (either factually or
               linguistically), feel free to{" "}
               <a href={meta.gihubFileLink} rel="noopener noreferrer" target="_blank">
